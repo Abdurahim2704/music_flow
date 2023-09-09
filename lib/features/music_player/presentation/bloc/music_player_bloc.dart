@@ -9,7 +9,11 @@ part 'music_player_event.dart';
 part 'music_player_state.dart';
 
 class MusicPlayerBloc extends Bloc<MusicPlayerEvent, MusicPlayerState> {
-  MusicPlayerBloc() : super(const MusicPlayerInitial()) {
+  MusicPlayerBloc()
+      : super(const MusicPlayerInitial(
+          tracks: [],
+        )) {
+    on<MusicInitialStateEvent>((event, emit) => null);
     on<MusicFetchedSuccessEvent>(
       (event, emit) async {
         await _onMusicFetchedEvent(event, emit).then((value) => null);
@@ -31,4 +35,6 @@ class MusicPlayerBloc extends Bloc<MusicPlayerEvent, MusicPlayerState> {
       }
     }
   }
+
+  Future<void> _onMusicInitialEvent(event, emit) async {}
 }
